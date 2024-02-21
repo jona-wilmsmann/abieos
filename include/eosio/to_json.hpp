@@ -94,16 +94,16 @@ void int_to_json(T value, S& stream) {
    bool                                               neg = value < 0;
    if (neg)
       uvalue = -uvalue;
-   if (sizeof(T) > 4)
-      *b.pos++ = '"';
+   //if (sizeof(T) > 4)
+   //   *b.pos++ = '"';
    do {
       *b.pos++ = '0' + (uvalue % 10);
       uvalue /= 10;
    } while (uvalue);
    if (neg)
       *b.pos++ = '-';
-   if (sizeof(T) > 4)
-      *b.pos++ = '"';
+   //if (sizeof(T) > 4)
+   //   *b.pos++ = '"';
    b.reverse();
    stream.write(b.data, b.pos - b.data);
 }
