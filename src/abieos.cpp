@@ -216,7 +216,7 @@ extern "C" abieos_bool abieos_json_to_bin_reorderable(abieos_context* context, u
 }
 
 extern "C" const char* abieos_bin_to_json(abieos_context* context, uint64_t contract, const char* type,
-                                          const char* data, size_t size) {
+                                          const char* data, size_t size, bool allow_extra_data) {
     fix_null_str(type);
     return handle_exceptions(context, nullptr, [&]() -> const char* {
         if (!data)
@@ -231,7 +231,7 @@ extern "C" const char* abieos_bin_to_json(abieos_context* context, uint64_t cont
         auto t = contract_it->second.get_type(type);
         eosio::input_stream bin{data, size};
         context->result_str = t->bin_to_json(bin);
-        if (bin.pos != bin.end)
+        if (bin.pos != bin.end && !allow_extra_data)
             throw std::runtime_error("Extra data");
         return context->result_str.c_str();
     });

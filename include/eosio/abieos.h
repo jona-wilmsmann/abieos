@@ -62,7 +62,7 @@ abieos_bool abieos_json_to_bin_reorderable(abieos_context* context, uint64_t con
 // Convert binary to json. The context owns the returned string. Returns null on error; use abieos_get_error to retrieve
 // error.
 const char* abieos_bin_to_json(abieos_context* context, uint64_t contract, const char* type, const char* data,
-                               size_t size);
+                               size_t size, bool allow_extra_data = false);
 
 // Convert hex to json. The context owns the returned memory. Returns null on error; use abieos_get_error to retrieve
 // error.
