@@ -132,7 +132,7 @@ extern "C" abieos_bool abieos_set_abi_bin(abieos_context* context, uint64_t cont
         from_bin(def, stream);
         abieos::abi c;
         convert(def, c);
-        context->contracts.insert({name{contract}, std::move(c)});
+        context->contracts.insert_or_assign(name{contract}, std::move(c));
         return true;
     });
 }
